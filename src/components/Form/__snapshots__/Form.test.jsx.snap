@@ -1,10 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Form component renders Form 1`] = `
-<div>
+<div
+  className="Form"
+>
   <form>
     <label>
-      Url:
+      API Url:
       <input
         type="text"
       />
