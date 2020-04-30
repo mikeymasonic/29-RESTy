@@ -1,0 +1,16 @@
+.Form {
+  margin: auto;
+  width: 25rem;
+  background-color: purple;
+  color: whitesmoke;
+  padding: 20px;
+}
+
+h3 {
+  text-align: center;
+}
+
+p {
+  padding: 1rem 2rem;
+  line-height: 1.5rem;
+}

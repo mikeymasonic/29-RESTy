@@ -1,9 +1,10 @@
 import React from 'react';
+import styles from './Form.css';
 
 const Form = () => (
-  <div>
+  <div className={styles.Form}>
     <form>
-      <label>Url:<input type="text"></input></label> 
+      <label>API Url:<input type="text"></input></label> 
       <div>
         <label><input type="radio" name="method" value="get" />GET</label>
         <label><input type="radio" name="method" value="post" />POST</label>
