@@ -1,7 +1,7 @@
 import React from 'react';
-import Form from '../Form/Form';
+import FormControl from '../../containers/FormControl';
 
 export default function App() {
-  return <Form />;
+  return <FormControl />;
 }
   
