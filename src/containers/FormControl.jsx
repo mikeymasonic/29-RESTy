@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Form from '../components/Form/Form';
-import { fetchResponse } from '../services/api';
+import { fetchResponse, fetchHeaders } from '../services/api';
 import Display from '../components/Display/Display';
 
 const FormControl = () => {
@@ -8,6 +8,7 @@ const FormControl = () => {
   const [method, setMethod] = useState('GET');
   const [body, setBody] = useState('');
   const [response, setResponse] = useState('');
+  const [headers, setHeaders] = useState('');
 
   const handleChange = ({ target }) => {
     if(target.name === 'url') setUrl(target.value);
@@ -31,6 +32,8 @@ const FormControl = () => {
         body: body
       };
     }
+    fetchHeaders(url, requestObject)
+      .then(headers => setHeaders(headers));
     fetchResponse(url, requestObject)
       .then(response => setResponse(response));
   };
@@ -38,7 +41,7 @@ const FormControl = () => {
   return (
     <>
       <Form url={url} method={method} body={body} onChange={handleChange} onSubmit={handleSubmit}/>
-      <Display response={(response)} />
+      <Display headers={headers} response={(response)} />
     </>
   );
 };
