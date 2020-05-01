@@ -6,8 +6,9 @@ exports[`Form component renders Form 1`] = `
 >
   <form>
     <label>
-      API Url:
+      URL:
       <input
+        name="url"
         type="text"
       />
     </label>
@@ -16,7 +17,7 @@ exports[`Form component renders Form 1`] = `
         <input
           name="method"
           type="radio"
-          value="get"
+          value="GET"
         />
         GET
       </label>
@@ -24,7 +25,7 @@ exports[`Form component renders Form 1`] = `
         <input
           name="method"
           type="radio"
-          value="post"
+          value="POST"
         />
         POST
       </label>
@@ -32,7 +33,7 @@ exports[`Form component renders Form 1`] = `
         <input
           name="method"
           type="radio"
-          value="put"
+          value="PUT"
         />
         PUT
       </label>
@@ -40,7 +41,7 @@ exports[`Form component renders Form 1`] = `
         <input
           name="method"
           type="radio"
-          value="patch"
+          value="PATCH"
         />
         PATCH
       </label>
@@ -48,12 +49,13 @@ exports[`Form component renders Form 1`] = `
         <input
           name="method"
           type="radio"
-          value="delete"
+          value="DELETE"
         />
         DELETE
       </label>
     </div>
     <textarea
+      name="body"
       placeholder="Body"
     />
     <button

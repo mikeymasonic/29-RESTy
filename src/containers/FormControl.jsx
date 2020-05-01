@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Form from '../components/Form/Form';
 import { fetchResponse } from '../services/api';
+import Display from '../components/Display/Display';
 
 const FormControl = () => {
   const [url, setUrl] = useState('');
@@ -15,14 +16,14 @@ const FormControl = () => {
   };
 
   const handleSubmit = () => {
-    event.preventEDefault();
+    event.preventDefault();
     let requestObject;
     if(method === 'GET' || method === 'DELETE') {
-      requestObject = {
-        method: method
+      requestObject = { 
+        method: method 
       };
     } else {
-      requestObject = {
+      requestObject = { 
         method: method,
         headers: {
           'Content-Type': 'application/json',
@@ -37,6 +38,7 @@ const FormControl = () => {
   return (
     <>
       <Form url={url} method={method} body={body} onChange={handleChange} onSubmit={handleSubmit}/>
+      <Display response={(response)} />
     </>
   );
 };

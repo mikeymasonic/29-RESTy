@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './Display.css';
 
 const Display = ({ response }) => {
   const responseList = Object.keys(response).map(keyValue => {
@@ -7,7 +8,7 @@ const Display = ({ response }) => {
   });
 
   return (
-    <div>
+    <div className={styles.Display}>
       <p>{responseList}</p>
     </div>
   );
