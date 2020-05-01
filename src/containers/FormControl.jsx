@@ -41,7 +41,7 @@ const FormControl = () => {
   return (
     <>
       <Form url={url} method={method} body={body} onChange={handleChange} onSubmit={handleSubmit}/>
-      <Display headers={headers} response={(response)} />
+      <Display headers={headers} response={response} />
     </>
   );
 };
