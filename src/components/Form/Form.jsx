@@ -1,47 +1,17 @@
-// import React from 'react';
-// import PropTypes from 'prop-types';
-// import styles from './Form.css';
-
-// const Form = ({ url, body, onChange, onSubmit }) => (
-//   <div className={styles.Form}>
-//     <form onSubmit={onSubmit}>
-//       <label>API URL:<input type="text" name="url" value={url} onChange={onChange}></input></label> 
-//       <div>
-//         <label><input type="radio" name="method" value="GET" onChange={onChange} />GET</label>
-//         <label><input type="radio" name="method" value="POST" onChange={onChange} />POST</label>
-//         <label><input type="radio" name="method" value="PUT" onChange={onChange} />PUT</label>
-//         <label><input type="radio" name="method" value="PATCH" onChange={onChange} />PATCH</label>
-//         <label><input type="radio" name="method" value="DELETE" onChange={onChange} />DELETE</label>
-//       </div> 
-//       <textarea placeholder="Body" name="body" value={body} onChange={onChange}></textarea>
-//       <button type="submit">Submit</button>
-//     </form>
-//   </div>
-// );
-
-// Form.propTypes = {
-//   url: PropTypes.string,
-//   body: PropTypes.string,
-//   onChange: PropTypes.func,
-//   onSubmit: PropTypes.func
-// };
-
-// export default Form;
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Form.css';
 
-const Form = ({ url, body, onChange, onSubmit }) => (
+const Form = ({ url, method, body, onChange, onSubmit }) => (
   <div className={styles.Form}>
     <form onSubmit={onSubmit}>
-      <label>URL:<input type="text" name="url" value={url} onChange={onChange}></input></label> 
+      <label>API URL:<input type="text" name="url" value={url} onChange={onChange}></input></label> 
       <div>
-        <label><input type="radio" name="method" value="GET" onChange={onChange} />GET</label>
-        <label><input type="radio" name="method" value="POST" onChange={onChange} />POST</label>
-        <label><input type="radio" name="method" value="PUT" onChange={onChange} />PUT</label>
-        <label><input type="radio" name="method" value="PATCH" onChange={onChange} />PATCH</label>
-        <label><input type="radio" name="method" value="DELETE" onChange={onChange} />DELETE</label>
+        <label><input type="radio" name="method" value="GET" checked={method === 'GET'} onChange={onChange} />GET</label>
+        <label><input type="radio" name="method" value="POST" checked={method === 'POST'} onChange={onChange} />POST</label>
+        <label><input type="radio" name="method" value="PUT" checked={method === 'PUT'} onChange={onChange} />PUT</label>
+        <label><input type="radio" name="method" value="PATCH" checked={method === 'PATCH'} onChange={onChange} />PATCH</label>
+        <label><input type="radio" name="method" value="DELETE" checked={method === 'DELETE'} onChange={onChange} />DELETE</label>
       </div>
       <textarea placeholder="Body" name="body" value={body} onChange={onChange}></textarea>
       <button type="submit">Submit</button>
@@ -51,6 +21,7 @@ const Form = ({ url, body, onChange, onSubmit }) => (
 
 Form.propTypes = {
   url: PropTypes.string,
+  method: PropTypes.string,
   body: PropTypes.string,
   onChange: PropTypes.func,
   onSubmit: PropTypes.func
