@@ -25,7 +25,8 @@ const List = ({ requests, handleClear }) => {
 
 List.propTypes = {
   requests: PropTypes.array,
-  handleClear: PropTypes.func
+  handleClear: PropTypes.func,
+  handleLoad: PropTypes.func
 };
 
 export default List;
