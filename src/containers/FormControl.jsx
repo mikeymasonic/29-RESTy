@@ -9,6 +9,7 @@ const FormControl = () => {
   const [url, setUrl] = useState('');
   const [method, setMethod] = useState('GET');
   const [body, setBody] = useState('');
+  const [disable, setDisable] = useState(true);
   const [headers, setHeaders] = useState({});
   const [response, setResponse] = useState({});
   const [requests, setRequests] = useState([]);
@@ -22,6 +23,12 @@ const FormControl = () => {
     if(target.name === 'url') setUrl(target.value);
     if(target.name === 'method') setMethod(target.value);
     if(target.name === 'body') setBody(target.value);
+
+    if(target.value === 'GET' || target.value === 'DELETE') {
+      setDisable(true);
+    } else if(target.value === 'POST' || target.value === 'PUT' || target.value === 'PATCH') {
+      setDisable(false);
+    }
   };
 
   const handleSubmit = () => {
@@ -46,14 +53,21 @@ const FormControl = () => {
     fetchResponse(url, requestObject)
       .then(response => setResponse(response));
 
-    // Make hook
     const userRequest = {
       url: url,
       method: method
     };
-    const newRequests = [...requests, userRequest];
-    setRequests(newRequests);
-    localStorage.setItem('requests', JSON.stringify(newRequests));
+    let alreadyExists = false;
+    requests.find(request => {
+      if((request.method === userRequest.method) && (request.url === userRequest.url)) alreadyExists = true;
+    });
+
+    if(!alreadyExists) {
+      const newRequests = [...requests, userRequest];
+      setRequests(newRequests);
+      localStorage.setItem('requests', JSON.stringify(newRequests));
+    }
+    alreadyExists = false;
   };
 
   const handleClear = () => {
@@ -61,13 +75,18 @@ const FormControl = () => {
     setRequests([]);
   };
 
+  const handleLoad = (url, method) => {
+    setUrl(url);
+    setMethod(method);
+  };
+
   return (
     <div className={styles.FormControl}>
       <div className={styles.left}>
-        <List requests={requests} handleClear={handleClear}/>
+        <List requests={requests} handleClear={handleClear} handleLoad={handleLoad}/>
       </div>
       <div className={styles.right}>
-        <Form url={url} method={method} body={body} onChange={handleChange} onSubmit={handleSubmit}/>
+        <Form url={url} method={method} body={body} disable={disable} onChange={handleChange} onSubmit={handleSubmit}/>
         <Display headers={headers} response={response} />
       </div>
     </div>

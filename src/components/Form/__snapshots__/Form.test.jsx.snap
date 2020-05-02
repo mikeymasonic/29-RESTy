@@ -72,7 +72,7 @@ exports[`Form component renders Form 1`] = `
       disabled={true}
       name="body"
       onChange={[Function]}
-      placeholder="Body"
+      placeholder="JSON Body"
       value=""
     />
     <button
