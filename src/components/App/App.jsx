@@ -5,7 +5,7 @@ import styles from './App.css';
 export default function App() {
   return (
     <div className={styles.App}>
-      <FormControl />;
+      <FormControl />
     </div>
   );
 }
