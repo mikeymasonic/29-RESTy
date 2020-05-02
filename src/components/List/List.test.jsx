@@ -6,7 +6,8 @@ describe('List component', () => {
   it('renders List', () => {
     const wrapper = shallow(<List 
       requests={[]}
-      handleClear={() => {}}/>);
+      handleClear={() => {}}
+      handleLoad={() => {}}/>);
     expect(wrapper).toMatchSnapshot();
   });
 });
