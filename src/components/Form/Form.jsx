@@ -13,7 +13,7 @@ const Form = ({ url, method, body, onChange, onSubmit, disable }) => (
         <label><input type="radio" name="method" value="PATCH" checked={method === 'PATCH'} onChange={onChange} />PATCH</label>
         <label><input type="radio" name="method" value="DELETE" checked={method === 'DELETE'} onChange={onChange} />DELETE</label>
       </div>
-      <textarea placeholder="Body" name="body" value={body} onChange={onChange} disabled={disable}></textarea>
+      <textarea placeholder="JSON Body" name="body" value={body} onChange={onChange} disabled={disable}></textarea>
       <button type="submit">Submit</button>
     </form>
   </div>
