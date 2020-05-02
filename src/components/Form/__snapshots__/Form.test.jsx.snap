@@ -4,12 +4,16 @@ exports[`Form component renders Form 1`] = `
 <div
   className="Form"
 >
-  <form>
+  <form
+    onSubmit={[Function]}
+  >
     <label>
-      API URL:
+      URL:
       <input
         name="url"
+        onChange={[Function]}
         type="text"
+        value=""
       />
     </label>
     <div>
@@ -17,6 +21,7 @@ exports[`Form component renders Form 1`] = `
         <input
           checked={false}
           name="method"
+          onChange={[Function]}
           type="radio"
           value="GET"
         />
@@ -26,6 +31,7 @@ exports[`Form component renders Form 1`] = `
         <input
           checked={false}
           name="method"
+          onChange={[Function]}
           type="radio"
           value="POST"
         />
@@ -35,6 +41,7 @@ exports[`Form component renders Form 1`] = `
         <input
           checked={false}
           name="method"
+          onChange={[Function]}
           type="radio"
           value="PUT"
         />
@@ -44,6 +51,7 @@ exports[`Form component renders Form 1`] = `
         <input
           checked={false}
           name="method"
+          onChange={[Function]}
           type="radio"
           value="PATCH"
         />
@@ -53,6 +61,7 @@ exports[`Form component renders Form 1`] = `
         <input
           checked={false}
           name="method"
+          onChange={[Function]}
           type="radio"
           value="DELETE"
         />
@@ -60,8 +69,11 @@ exports[`Form component renders Form 1`] = `
       </label>
     </div>
     <textarea
+      disabled={true}
       name="body"
+      onChange={[Function]}
       placeholder="Body"
+      value=""
     />
     <button
       type="submit"
