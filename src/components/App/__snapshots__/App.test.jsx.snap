@@ -4,6 +4,7 @@ exports[`App component renders App 1`] = `
 <div
   className="App"
 >
+  <Header />
   <FormControl />
 </div>
 `;

@@ -1,0 +1,18 @@
+.Header {
+  background-color: #27496d;
+  border-radius: 10px;
+  font-family: monospace;
+  color: #dae1e7;
+  text-align: right;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  h1 {
+    font-size: 2rem;
+    margin-block-start: 0.25em;
+    margin-block-end: 0.25em;
+  }
+
+
+}

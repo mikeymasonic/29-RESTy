@@ -57,6 +57,7 @@ const FormControl = () => {
       url: url,
       method: method
     };
+    
     let alreadyExists = false;
     requests.find(request => {
       if((request.method === userRequest.method) && (request.url === userRequest.url)) alreadyExists = true;
