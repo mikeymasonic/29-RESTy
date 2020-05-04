@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Form from '../components/Form/Form';
 import Display from '../components/Display/Display';
 import List from '../components/List/List';
-import { fetchResponse, fetchHeaders } from '../services/api';
+import { fetchResponse } from '../services/api';
 import styles from './FormControl.css';
 
 const FormControl = () => {
   const [url, setUrl] = useState('');
   const [method, setMethod] = useState('GET');
   const [body, setBody] = useState('');
+
   const [disable, setDisable] = useState(true);
+
   const [headers, setHeaders] = useState({});
   const [response, setResponse] = useState({});
   const [requests, setRequests] = useState([]);
@@ -17,27 +19,35 @@ const FormControl = () => {
   useEffect(() => {
     const storedReqs = JSON.parse(localStorage.getItem('requests'));
     if(storedReqs) setRequests(storedReqs);
-  }, []);
+
+    if(method === 'GET' || method === 'DELETE') {
+      setDisable(true);
+    } else if(method === 'POST' || method === 'PUT' || method === 'PATCH') {
+      setDisable(false);
+    }
+  }, [method]);
 
   const handleChange = ({ target }) => {
     if(target.name === 'url') setUrl(target.value);
     if(target.name === 'method') setMethod(target.value);
     if(target.name === 'body') setBody(target.value);
-
-    if(target.value === 'GET' || target.value === 'DELETE') {
-      setDisable(true);
-    } else if(target.value === 'POST' || target.value === 'PUT' || target.value === 'PATCH') {
-      setDisable(false);
-    }
   };
 
   const handleSubmit = () => {
     event.preventDefault();
 
     let requestObject;
+    let saveObject;
+
     if(method === 'GET' || method === 'DELETE') {
+      setBody('');
       requestObject = { 
         method: method 
+      };
+      saveObject = {
+        url: url,
+        method: method,
+        body: ''
       };
     } else {
       requestObject = { 
@@ -47,24 +57,35 @@ const FormControl = () => {
         },
         body: body
       };
+      saveObject = {
+        url: url,
+        method: method,
+        body: body
+      };
     }
-    fetchHeaders(url, requestObject)
-      .then(headers => setHeaders(headers));
-    fetchResponse(url, requestObject)
-      .then(response => setResponse(response));
 
-    const userRequest = {
-      url: url,
-      method: method
-    };
-    
+    fetchResponse(url, requestObject)
+      .then(response => { 
+        if(!response.headers && !response.response || (!response.ok)) {
+          setResponse(response.response);
+          setHeaders(response.headers);  
+          throw Error ('Bad Request');
+        } else {
+          setResponse(response.response);
+          setHeaders(response.headers);    
+          handleSave(saveObject);
+        }
+      });
+  };
+
+  const handleSave = (saveObject) => {
     let alreadyExists = false;
     requests.find(request => {
-      if((request.method === userRequest.method) && (request.url === userRequest.url)) alreadyExists = true;
+      if(request.method === saveObject.method && request.url === saveObject.url && request.body === saveObject.body) alreadyExists = true;
     });
 
     if(!alreadyExists) {
-      const newRequests = [...requests, userRequest];
+      const newRequests = [...requests, saveObject];
       setRequests(newRequests);
       localStorage.setItem('requests', JSON.stringify(newRequests));
     }
@@ -76,9 +97,10 @@ const FormControl = () => {
     setRequests([]);
   };
 
-  const handleLoad = (url, method) => {
+  const handleLoad = (url, method, body) => {
     setUrl(url);
     setMethod(method);
+    setBody(body);
   };
 
   return (
